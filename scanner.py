@@ -34,6 +34,7 @@ if __name__ == '__main__':
         outpf = sys.argv[2]
         if sys.argv[3] == "-t":
             sock.settimeout(sys.argv[4])
+        else: pass
 
     except:
         print("Usage: python "+sys.argv[0]+" <PORT> <OUTPUT_FILE>\nYou can also use your own timeout, after the output file write: -t <SECONDS_TIMEOUT>")

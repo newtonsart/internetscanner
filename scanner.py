@@ -5,7 +5,6 @@ import sys
 import os
 def scan(port, t):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(t)
     for i in range(254): 
         i += 1 
         if i != 10 or i != 127: 
@@ -15,6 +14,7 @@ def scan(port, t):
                         for u in range(256): 
                             ip=str(i)+"."+str(o)+"."+str(p)+"."+str(u)
                             print("[SCANNING] "+ip)
+                            sock.settimeout(t)
                             result = sock.connect_ex((ip, port))
                             if result == 0:
                                 f.write(ip)

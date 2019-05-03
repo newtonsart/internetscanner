@@ -2,7 +2,8 @@ import socket
 import sys
 import os
 from threading import Thread
-
+#this program takes some time to scan everything, I recommend you to run it on a vps and wait until its finished.
+#as this program isnt so fast, i would like you to give me some ideas to make it faster, thank you.
 def scanback(port):
     for i in range(127):
         if i != 10 or i != 127: 

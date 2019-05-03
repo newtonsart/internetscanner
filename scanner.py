@@ -22,6 +22,12 @@ def scan(port, t):
                             else: print("[CLOSED] "+ip)
                             sock.close()
 if __name__ == '__main__':
+    if os.getuid() != 0:
+        print("                You need to be root!")
+        quit()
+    os.system("ulimit -s 99999; ulimit -n 99999")
+    os.system("sysctl -w fs.file-max=999999 1>/dev/null 2>/dev/null")
+    os.system("ulimit 9999999; ulimit -H 99999999")
     try:
         port = int(sys.argv[1])
         outpf = sys.argv[2]

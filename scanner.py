@@ -22,7 +22,6 @@ def scan(port):
 if __name__ == '__main__':
     t = 1
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(t)
     if os.getuid() != 0:
         print("                You need to be root!")
         quit()
@@ -32,12 +31,9 @@ if __name__ == '__main__':
     try:
         port = int(sys.argv[1])
         outpf = sys.argv[2]
-        if sys.argv[3] == "-t":
-            sock.settimeout(sys.argv[4])
-        else: pass
-
+        sock.settimeout(sys.argv[3])
     except:
-        print("Usage: python "+sys.argv[0]+" <PORT> <OUTPUT_FILE>\nYou can also use your own timeout, after the output file write: -t <SECONDS_TIMEOUT>")
+        print("Usage: python "+sys.argv[0]+" <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT>")
         quit()
     f=open(outpf,"w+")
     print("INTERNET SCANNING STARTED WITH PORT: "+str(port))

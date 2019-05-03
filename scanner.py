@@ -3,7 +3,9 @@
 import socket
 import sys
 import os
-def scan(port):
+def scan(port, t):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(t)
     for i in range(254): 
         i += 1 
         if i != 10 or i != 127: 
@@ -20,23 +22,15 @@ def scan(port):
                             else: print("[CLOSED] "+ip)
                             sock.close()
 if __name__ == '__main__':
-    t = 1
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    if os.getuid() != 0:
-        print("                You need to be root!")
-        quit()
-    os.system("ulimit -s 99999; ulimit -n 99999")
-    os.system("sysctl -w fs.file-max=999999 1>/dev/null 2>/dev/null")
-    os.system("ulimit 9999999; ulimit -H 99999999")
     try:
         port = int(sys.argv[1])
         outpf = sys.argv[2]
-        sock.settimeout(sys.argv[3])
+        t = int(sys.argv[3])
     except:
         print("Usage: python "+sys.argv[0]+" <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT>")
         quit()
     f=open(outpf,"w+")
     print("INTERNET SCANNING STARTED WITH PORT: "+str(port))
-    scan(port)
+    scan(port, t)
     f.close
     print("All the internet scanned!!")

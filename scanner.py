@@ -17,7 +17,6 @@ def scanback(port):
                             ipb=str(abs(i))+"."+str(abs(o))+"."+str(abs(p))+"."+str(abs(u))
                             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                             result = sock.connect_ex((ipb, port))
-                            print(ip)
                             if result == 0:
                                 f.write("[OPEN] "+ipb)
                                 print("[OPEN] "+ipb)
@@ -34,7 +33,6 @@ def scan(port):
                             ip=str(i)+"."+str(o)+"."+str(p)+"."+str(u)
                             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                             result = sock.connect_ex((ip, port))
-                            print(ip)
                             if result == 0:
                                 f.write("[OPEN] "+ip)
                                 print("[OPEN] "+ip)

@@ -19,6 +19,7 @@ def scan(port, x):
                             if x == z:
                                 print("[SCANNING] "+ip)
                                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                                sock.settimeout(10)
                                 result = sock.connect_ex((ip, port))
                                 if result == 0:
                                     f.write("[OPEN] "+ip)

@@ -10,7 +10,7 @@ def scan(port, ip, t):
     sock.settimeout(t)
     result = sock.connect_ex((ip, port))
     if result == 0:
-    	f.write(ip)
+    	f.write(ip+"\n")
     	print("[OPEN] "+ip)
     else: print("[CLOSED] "+ip)
     sock.close()

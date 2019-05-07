@@ -9,13 +9,13 @@ import time
 
 def scan(port, ip, t):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print("[SCANNING] "+ip)
+    print("[SCANNING] "+ip+"\n")
     sock.settimeout(t)
     result = sock.connect_ex((ip, port))    #sends packets and waits for a response
     if result == 0:
     	f.write(ip+"\n")
-    	print("[OPEN] "+ip)
-    else: print("[CLOSED] "+ip)
+    	print("[OPEN] "+ip+"\n")
+    else: print("[CLOSED] "+ip+"\n")
     sock.close()
     
 if __name__ == '__main__':
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         print("Usage: python "+sys.argv[0]+" <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT>")
         quit()
     f=open(outpf, "w+")
-    print("INTERNET SCANNING STARTED WITH PORT: "+str(port))
+    print("INTERNET SCANNING STARTED WITH PORT: "+str(port)+"\n")
     
     for i in range(254): 
         i += 1

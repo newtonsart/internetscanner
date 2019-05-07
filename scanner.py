@@ -50,7 +50,7 @@ if __name__ == '__main__':
                             #declares the ip that is going to be used
                             t = _thread.start_new_thread (scan, (port, ip, t, ))
                             s += 0
-                            if s == 1000:
+                            if s == 500:
                                 time.sleep(35)
                                 s = 0
                             #to do multiple threads

@@ -52,7 +52,7 @@ if __name__ == '__main__':
                             thr = threading.Thread(target=scan, args=(port, ip, t, outpf, ))
                             thr.start()
                             s += 1
-                            if s > 500:
+                            if s > th:
                                 thr.join()
                                 s=0
                             #to do multiple threads

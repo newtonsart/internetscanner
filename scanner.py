@@ -31,9 +31,10 @@ if __name__ == '__main__':
         port = int(sys.argv[1])
         outpf = sys.argv[2]
         t = int(sys.argv[3])
+        th = int(sys.argv[4])
         #checks for the inputs while starting the program
     except:
-        print("Usage: python "+sys.argv[0]+" <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT>")
+        print("Usage: python "+sys.argv[0]+" <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT> <MAX_THREADS>")
         quit()
     f=open(outpf, "w+")
     print("INTERNET SCANNING STARTED WITH PORT: "+str(port)+"\n")
@@ -50,7 +51,7 @@ if __name__ == '__main__':
                             #declares the ip that is going to be used
                             t = _thread.start_new_thread (scan, (port, ip, t, ))
                             s += 0
-                            if s == 500:
+                            if s == th:
                                 time.sleep(35)
                                 s = 0
                             #to do multiple threads

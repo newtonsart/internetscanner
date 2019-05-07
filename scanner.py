@@ -4,19 +4,19 @@
 import socket
 import sys
 import os
-import _thread
+import threading
 import time
 
-def scan(port, ip, t):
+def scan(port, ip, t, outpf):
+    f=open(outpf, "a")
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print("[SCANNING] "+ip+"\n")
     sock.settimeout(t)
-    result = sock.connect_ex((ip, port))    #sends packets and waits for a response
+    result = sock.connect_ex((ip, port))
     if result == 0:
     	f.write(ip+"\n")
     	print("[OPEN] "+ip+"\n")
-    else: print("[CLOSED] "+ip+"\n")
     sock.close()
+    f.close
     
 if __name__ == '__main__':
     if os.getuid() != 0:
@@ -37,11 +37,11 @@ if __name__ == '__main__':
         print("Usage: python "+sys.argv[0]+" <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT> <MAX_THREADS>")
         quit()
     f=open(outpf, "w+")
+    s=0
     print("INTERNET SCANNING STARTED WITH PORT: "+str(port)+"\n")
     
     for i in range(254): 
         i += 1
-        s=0
         if i != 10 or i != 127:
             for o in range(256):
                 if i != 192 and o != 168 or i != 172 and o < 16 and o > 31 or i != 169 and o != 254:
@@ -49,11 +49,12 @@ if __name__ == '__main__':
                         for u in range(256):
                             ip=str(i)+"."+str(o)+"."+str(p)+"."+str(u)
                             #declares the ip that is going to be used
-                            t = _thread.start_new_thread (scan, (port, ip, t, ))
-                            s += 0
-                            if s == th:
-                                time.sleep(35)
-                                s = 0
+                            thr = threading.Thread(target=scan, args=(port, ip, t, outpf, ))
+                            thr.start()
+                            s += 1
+                            if s > 500:
+                                thr.join()
+                                s=0
                             #to do multiple threads
     
     f.close

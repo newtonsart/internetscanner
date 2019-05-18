@@ -6,6 +6,7 @@ import sys
 import os
 import threading
 import time
+import ipaddress
 
 def scan(port, ip, t, outpf):
     f=open(outpf, "a")
@@ -40,21 +41,18 @@ if __name__ == '__main__':
     s=0
     print("INTERNET SCANNING STARTED WITH PORT: "+str(port)+"\n")
     
-    for i in range(254): 
-        i += 1
-        if i != 10 or i != 127:
-            for o in range(256):
-                if i != 192 and o != 168 or i != 172 and o < 16 and o > 31 or i != 169 and o != 254:
-                    for p in range(256):
-                        for u in range(256):
-                            ip=str(i)+"."+str(o)+"."+str(p)+"."+str(u)
-                            #declares the ip that is going to be used
-                            thr = threading.Thread(target=scan, args=(port, ip, t, outpf, ))
-                            thr.start()
-                            s += 1
-                            if s > th:
-                                thr.join()
-                                s=0
+    for i in range(256):
+        for o in range(256):
+            for p in range(256):
+                for u in range(256):
+                    ip=str(i)+"."+str(o)+"."+str(p)+"."+str(u)
+                    if ipaddress.ip_address(ip).is_private == False:
+                        thr = threading.Thread(target=scan, args=(port, ip, t, outpf, ))
+                        thr.start()
+                        s += 1
+                        if s > th:
+                            thr.join()
+                            s=0
                             #to do multiple threads
     
     f.close

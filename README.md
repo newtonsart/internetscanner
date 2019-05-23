@@ -3,8 +3,8 @@ Scans every public IPV4 for the open ports you specify.
 
 ## Installing
 ```
-chmod +x internetscanner.py
-cp internetscanner.py /usr/local/bin
+chmod +x internetscanner
+cp internetscanner /usr/local/bin
 echo Installation completed
 ```
 

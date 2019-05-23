@@ -20,4 +20,4 @@ sudo python3 scanner.py <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT> <MAX_THREADS>
 * Python modules used: Socket, sys, os, ipaddress and threading.
 
 ## Authors
-* **[LolArt]**(https://github.com/PurpleBooth)
+* **[[LolArt](https://github.com/PurpleBooth)]**

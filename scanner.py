@@ -5,7 +5,6 @@ import socket
 import sys
 import os
 import threading
-import time
 import ipaddress
 
 def scan(port, ip, t, outpf):

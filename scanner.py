@@ -1,6 +1,4 @@
-#this program takes some time to scan everything, I recommend you to run it on a vps and wait until its finished.
-#as this program isnt so fast, i would like you to give me some ideas to make it faster, thank you.
-
+#!/usr/bin/env python3
 import socket
 import sys
 import os

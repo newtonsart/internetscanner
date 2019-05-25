@@ -32,7 +32,7 @@ if __name__ == '__main__':
         th = int(sys.argv[4])
         #checks for the inputs while starting the program
     except:
-        print("Usage: python "+sys.argv[0]+" <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT> <MAX_THREADS>")
+        print("Usage: internetscanner <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT> <MAX_THREADS>")
         quit()
     f=open(outpf, "w+")
     s=0

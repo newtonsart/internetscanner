@@ -8,8 +8,13 @@ cd internetscanner
 ```
 
 ## Usage
+###If not installed
 ```
-sudo python3 scanner.py <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT> <MAX_THREADS>
+sudo python3 internetscanner <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT> <MAX_THREADS>
+```
+###If it's installed
+```
+internetscanner <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT> <MAX_THREADS>
 ```
 
 ## Built with

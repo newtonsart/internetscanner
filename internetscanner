@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+import socket
+import sys
+import os
+import threading
+import ipaddress
+
+def scan(port, ip, t, outpf):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(t)
+    result = sock.connect_ex((ip, port))
+    if result == 0:
+    	os.system("echo {} >> {}".format(ip, outpf))
+    sock.close()
+    
+if __name__ == '__main__':
+    if os.getuid() != 0:
+        print("                You need to be root!")
+        quit()
+    os.system("ulimit -s 99999; ulimit -n 99999")
+    os.system("sysctl -w fs.file-max=999999 1>/dev/null 2>/dev/null")
+    os.system("ulimit 9999999; ulimit -H 99999999")
+    #this will let you send more packets at the same time, btw, use linux, but the new windows terminal seems pretty good, havent tried yet...
+    
+    try:
+        port = int(sys.argv[1])
+        outpf = sys.argv[2]
+        t = int(sys.argv[3])
+        try:
+            th = int(sys.argv[4])
+        except:
+            th = 62500
+        #checks for the inputs while starting the program
+    except:
+        print("Usage: internetscanner <PORT> <OUTPUT_FILE> <SECONDS_TIMEOUT> <MAX_THREADS>")
+        quit()
+    s=0
+    f = open(outpf, "w+")
+    f.close
+    os.system("clear")
+    print("INTERNET SCANNING STARTED WITH PORT: "+str(port))
+    
+    for i in range(1, 256):
+        for o in range(256):
+            for p in range(256):
+                for u in range(256):
+                    ip=str(i)+"."+str(o)+"."+str(p)+"."+str(u)
+                    if ipaddress.ip_address(ip).is_private == False:
+                        thr = threading.Thread(target=scan, args=(port, ip, t, outpf, ))
+                        thr.start()
+                        if threading.active_count() >= th:
+                            thr.join()
+                            #to do multiple threads
+                        else:
+                            print("Threads being used: {} Currently trying ip {}    ".format(threading.active_count(), ip), end="\r")
+    print("All the internet scanned!!")

@@ -1,6 +1,8 @@
 # internetscanner
 Scans every public IPV4 for the open ports you specify.
 
+Please don't use this for illegal purposes.
+
 ## Installing
 ```
 cd internetscanner
